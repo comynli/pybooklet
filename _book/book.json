@@ -1,0 +1,9 @@
+{
+    "github": "lixm/pybooklet",
+    "links": {
+        "about": false,
+        "issues": false,
+        "contribute": false
+    },
+    "theme": "./theme"
+}

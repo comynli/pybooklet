@@ -121,3 +121,56 @@ pyenv global 2.7.5
 
 
 *到这里，你或许已经迫不及待的想要开始了，那么你可以跳过本章之后的部分，直接看第二章，开始你的Python之旅，但是我还是强烈建议你以后回过头来看看本章剩下的部分，他演示了如何使用pyenv结合virtualenv的强大功能。*
+
+### uninstall 命令
+顾名思义，uninstall命令是用来卸载Python版本的，一个已经安装的版本，如果我们不在使用，可以简单的执行`uninstall`命令把它从硬盘上卸载。
+
+```bash
+pyenv uninstall 2.7.5
+```
+
+以上命令将卸载Python-2.7.5
+
+
+### pyenv与virtualenv
+pyenv通过插件，可以很好的和virtualenv一起工作，通过整合virtualenv，pyenv实现了真正意义上的环境隔离，每个项目都相当于使用一个单独的解释器。
+
+通过pyenv-installer安装的pyenv，已经安装好virtualenv插件了，如果不是通过pyenv-installer安装的pyenv，你可能需要自己安装virtualenv插件，安装方法也很简单：
+```bash
+cd $PYENV_ROOT/plugins
+git clone https://github.com/yyuu/pyenv-virtualenv.git
+```
+
+直接把插件clone下来就安装完成了。
+
+安装完成之后，我们可以通过virtualenv命令即可创建虚拟环境，virtualenv的一般用法如下：
+```bash
+pyenv virtualenv [-f|--force] [-u|--upgrade] [VIRTUALENV_OPTIONS] <version> <virtualenv-name>
+```
+
+选项`-f`表示强制的，也就是如果已经存在这个虚拟环境，那么将会覆盖这个虚拟环境
+选项`-u`表示upgrade，用于修改已经存在的虚拟环境的Python版本
+`VIRTUALENV_OPTIONS` 是传递给virtualenv的选项，可以通过virtualenv的帮助获取选项的含义
+`version` 表示Python版本
+`virtualenv-name` 是我们给虚拟环境指定的名字
+
+例如:
+```bash
+pyenv virtualenv 2.7.5 my_project
+```
+
+以上命令就创建了一个基于Python-2.7.5,名为my_project的虚拟环境。创建好的虚拟环境犹如一个单独Python版本一样，我们可以通过`local`或者`global`命令切换过去。
+
+由于每个解释器间是完全隔离的，所以强烈建议你的每个项目，都放置在单独的虚拟环境中。
+
+virtualenv插件还提供了`virtualenvs`命令，用于列出所有已经创建的虚拟环境，
+
+```bash
+pyenv virtualenvs
+```
+
+以上命令列出我们所有已经创建的虚拟环境，已经虚拟环境基于那个Python版本。
+
+当我们的一个项目生命周期结束的时候，我们或许会想要删除虚拟环境以释放我们的硬盘空间，删除虚拟环境非常简单，直接用`uninstall`命令像删除正常的Python版本一样就可以了。
+
+事实上，虚拟环境一旦创建，你就可以把他当成一个独立的版本来使用和维护了。

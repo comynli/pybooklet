@@ -13,6 +13,8 @@
         <meta name="generator" content="www.gitbook.io">
 
         
+        <link rel="next" href="./basic.html" />
+        
         
         <link rel="prev" href="./index.html" />
         
@@ -40,7 +42,7 @@
 
 
         
-    <div class="book" data-github="lixm/pybooklet" data-level="1" data-basepath="." data-revision="1399980632225">
+    <div class="book" data-github="lixm/pybooklet" data-level="1" data-basepath="." data-revision="1400230813408">
     <div class="book-header">
     <!-- Actions Left -->
     
@@ -127,6 +129,27 @@
                 
             </li>
         
+            <li  data-level="2" data-path="basic.html">
+                
+                <a href="./basic.html">
+                    <i class="fa fa-check"></i> <b>2.</b> Python基础
+                </a>
+                
+                
+                <ul class="articles">
+                    
+                        <li  data-level="2.1" data-path="basic/first.html">
+                            
+                            <a href="./basic/first.html">
+                                <i class="fa fa-check"></i> <b>2.1.</b> 最初的步骤
+                            </a>
+                            
+                        </li>
+                    
+                </ul>
+                
+            </li>
+        
 
         
         <li class="divider"></li>
@@ -142,20 +165,24 @@
             <div class="page-wrapper" tabindex="-1">
                 <div class="book-progress">
     <div class="bar">
-        <div class="inner" style="width: 100%;min-width: 0%;"></div>
+        <div class="inner" style="width: 33.333333333333336%;min-width: 0%;"></div>
     </div>
     <div class="chapters">
     
         <a href="./index.html" title="Introduction" class="chapter done new-chapter" data-progress="0" style="left: 0%;"></a>
     
-        <a href="./install.html" title="安装Python" class="chapter done new-chapter" data-progress="1" style="left: 100%;"></a>
+        <a href="./install.html" title="安装Python" class="chapter done new-chapter" data-progress="1" style="left: 33.333333333333336%;"></a>
+    
+        <a href="./basic.html" title="Python基础" class="chapter  new-chapter" data-progress="2" style="left: 66.66666666666667%;"></a>
+    
+        <a href="./basic/first.html" title="最初的步骤" class="chapter  " data-progress="2.1" style="left: 100%;"></a>
     
     </div>
 </div>
 
                 <div class="page-inner">
                 
-                    <section class="normal" id="section-gitbook_2">
+                    <section class="normal" id="section-gitbook_195">
                     
                         <h1 id="-python">安装Python</h1>
 <p>绝大多数Python入门书籍，都会介绍如何安装Python，然而，本书要介绍一种全新的安装方式。使用pyenv来安装并管理我们的环境。</p>
@@ -236,6 +263,37 @@
 <p>以上命令：会修改<code>$PYENV_HOME/version</code>文件的内容，标记全局Python版本，如何理解全局Python版本，可以认为全局版本是一个默认值，当一个目录及其父目录下面都没有<code>.python-version</code>文件的时候，会使用全局版本。</p>
 <p><strong>一般的，我们不修改全局版本，而使用期默认值<code>system</code>，因为在unix系统上，很多系统工具依赖于Python，如果我们修改了Python的版本，会造成绝大多数的依赖Python的系统工具无法使用，如果你不小心修改了，也不要紧张，使用<code>global</code>命令修改回来就可以了，有时候，你发现部分系统工具无法使用，你也可以看看你当前的Python版本</strong>。</p>
 <p><em>到这里，你或许已经迫不及待的想要开始了，那么你可以跳过本章之后的部分，直接看第二章，开始你的Python之旅，但是我还是强烈建议你以后回过头来看看本章剩下的部分，他演示了如何使用pyenv结合virtualenv的强大功能。</em></p>
+<h3 id="uninstall-">uninstall 命令</h3>
+<p>顾名思义，uninstall命令是用来卸载Python版本的，一个已经安装的版本，如果我们不在使用，可以简单的执行<code>uninstall</code>命令把它从硬盘上卸载。</p>
+<pre><code class="lang-bash">pyenv uninstall <span class="hljs-number">2.7</span>.<span class="hljs-number">5</span>
+</code></pre>
+<p>以上命令将卸载Python-2.7.5</p>
+<h3 id="pyenv-virtualenv">pyenv与virtualenv</h3>
+<p>pyenv通过插件，可以很好的和virtualenv一起工作，通过整合virtualenv，pyenv实现了真正意义上的环境隔离，每个项目都相当于使用一个单独的解释器。</p>
+<p>通过pyenv-installer安装的pyenv，已经安装好virtualenv插件了，如果不是通过pyenv-installer安装的pyenv，你可能需要自己安装virtualenv插件，安装方法也很简单：</p>
+<pre><code class="lang-bash"><span class="hljs-built_in">cd</span> <span class="hljs-variable">$PYENV_ROOT</span>/plugins
+git clone https://github.com/yyuu/pyenv-virtualenv.git
+</code></pre>
+<p>直接把插件clone下来就安装完成了。</p>
+<p>安装完成之后，我们可以通过virtualenv命令即可创建虚拟环境，virtualenv的一般用法如下：</p>
+<pre><code class="lang-bash">pyenv virtualenv [<span class="hljs-operator">-f</span>|--force] [-u|--upgrade] [VIRTUALENV_OPTIONS] &lt;version&gt; &lt;virtualenv-name&gt;
+</code></pre>
+<p>选项<code>-f</code>表示强制的，也就是如果已经存在这个虚拟环境，那么将会覆盖这个虚拟环境
+选项<code>-u</code>表示upgrade，用于修改已经存在的虚拟环境的Python版本
+<code>VIRTUALENV_OPTIONS</code> 是传递给virtualenv的选项，可以通过virtualenv的帮助获取选项的含义
+<code>version</code> 表示Python版本
+<code>virtualenv-name</code> 是我们给虚拟环境指定的名字</p>
+<p>例如:</p>
+<pre><code class="lang-bash">pyenv virtualenv <span class="hljs-number">2.7</span>.<span class="hljs-number">5</span> my_project
+</code></pre>
+<p>以上命令就创建了一个基于Python-2.7.5,名为my_project的虚拟环境。创建好的虚拟环境犹如一个单独Python版本一样，我们可以通过<code>local</code>或者<code>global</code>命令切换过去。</p>
+<p>由于每个解释器间是完全隔离的，所以强烈建议你的每个项目，都放置在单独的虚拟环境中。</p>
+<p>virtualenv插件还提供了<code>virtualenvs</code>命令，用于列出所有已经创建的虚拟环境，</p>
+<pre><code class="lang-bash">pyenv virtualenvs
+</code></pre>
+<p>以上命令列出我们所有已经创建的虚拟环境，已经虚拟环境基于那个Python版本。</p>
+<p>当我们的一个项目生命周期结束的时候，我们或许会想要删除虚拟环境以释放我们的硬盘空间，删除虚拟环境非常简单，直接用<code>uninstall</code>命令像删除正常的Python版本一样就可以了。</p>
+<p>事实上，虚拟环境一旦创建，你就可以把他当成一个独立的版本来使用和维护了。</p>
 
                     
                     </section>
@@ -245,8 +303,10 @@
         </div>
 
         
-        <a href="./index.html" class="navigation navigation-prev navigation-unique"><i class="fa fa-angle-left"></i></a>
+        <a href="./index.html" class="navigation navigation-prev "><i class="fa fa-angle-left"></i></a>
         
+        
+        <a href="./basic.html" class="navigation navigation-next "><i class="fa fa-angle-right"></i></a>
         
     </div>
 </div>
